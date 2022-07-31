@@ -1,0 +1,75 @@
+<header>
+    <nav>
+        <div class="d-flex bd-highlight align-items-center bg-dark text-white">
+            <div class="me-auto p-2 bd-highlight">
+                <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa" target="_blank" style="color:white ; text-decoration: none">
+                <img src="/assets/img/APLogo-20-20.png" alt="" width="100" class="d-inline-block align-text-center">
+            Yo Programo</a>
+            </div>
+            <div class="p-2 bd-highlight">
+                <a href="https://www.linkedin.com/in/evelyn-benitez-66a3854a/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="p-2 bd-highlight">
+                <button *ngIf="usuarioLogueado() == false" type="button" routerLink="/iniciarSesion" class="btn btn-light">Iniciar sesión</button>
+                <button *ngIf="usuarioLogueado() == true" (click)="cerrarSesion()" type="button" routerLink="/portfolio" class="btn btn-light">Cerrar sesión</button>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <div class="contenedor" >
+            <div class="fotoPerfil"> 
+                <img src="/assets/img/{{personas[0].imagen}}" alt="Foto de perfil" class="imgRedonda">
+            </div>
+            <div class="texto-encima">
+                <h1><b>{{this.personas[0].nombre}}</b></h1>
+                <h3>{{this.personas[0].profesion}}</h3>
+            
+            <div *ngIf="usuarioLogueado()">
+                <button><i class="fas fa-pencil-alt" type="button" data-bs-toggle="modal"
+                        data-bs-target="#editarPersona" (click)="onEditPersona(0)"></i></button>
+            </div>
+        </div>
+            <!-- Modal -->
+            <div class="modal fade" id="editarPersona" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="editarPersonaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editarPersonaLabel">Persona</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+                            <input type="hidden" name="id" formControlName="id">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" name="nombre" formControlName="nombre"
+                                    class="form-control" id="nombreInput"
+                                    placeholder="Nombre y apellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="profesion" class="form-label">Profesión</label>
+                                <input type="text" name="profesion" formControlName="profesion" class="form-control"
+                                    id="profesionInput" placeholder="Profesión">
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagen" class="form-label">Imagen</label>
+                                <input type="text" name="imagen" formControlName="imagen" class="form-control"
+                                    id="imagenInput" placeholder="Nombre del archivo">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary"
+                                    data-bs-dismiss="modal">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        </div>   
+    </div>
+</header>

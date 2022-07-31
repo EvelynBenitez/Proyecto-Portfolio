@@ -1,0 +1,91 @@
+<div class="titulos">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h2>Experiencia Laboral</h2>
+            </div>
+            <!-- Button trigger modal -->
+            <div *ngIf="usuarioLogueado()" class="col-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevaExperiencia"
+                    (click)="onNewExperiencia()">
+                    Agregar Experiencia Laboral
+                </button>
+
+                <!-- Modal Nueva Experiencia -->
+                <div class="modal fade" id="nuevaExperiencia" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="nuevaExperienciaLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="nuevaExperienciaLabel">Experiencia</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form [formGroup]="experienciaForm" (ngSubmit)="onSubmit()">
+                                    <input type="hidden" name="id" formControlName="id">
+                                    <div class="mb-3">
+                                        <label for="puesto" class="form-label">Puesto</label>
+                                        <input type="text" name="puesto" formControlName="puesto" class="form-control"
+                                            id="puestoInput" placeholder="Puesto o cargo desempeñado">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="empresa" class="form-label">Empresa</label>
+                                        <input type="text" name="empresa" formControlName="empresa" class="form-control"
+                                            id="empresaInput" placeholder="Empresa">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <input type="text" name="descripcion" formControlName="descripcion"
+                                            class="form-control" id="descripcionInput"
+                                            placeholder="Descripción de las tareas realizadas">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="periodo" class="form-label">Período</label>
+                                        <input type="text" name="periodo" formControlName="periodo" class="form-control"
+                                            id="periodoInput" placeholder="Período trabajado">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="imagen" class="form-label">Imagen</label>
+                                        <input type="text" name="imagen" formControlName="imagen" class="form-control"
+                                            id="imagenInput" placeholder="Nombre de archivo">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+        </div>
+        <div class="row" *ngFor="let experiencia of experiencias, let i = index">
+            <div class="col-10">
+                <div class="imgLogos">
+                    <a href="" target="_blank">
+                        <img src="/assets/img/{{experiencia.imagen}}" alt="" width="100"></a>
+                    <div class="texto-exp">
+                        <h4>{{ experiencia.empresa }}</h4>
+                        <h5>{{ experiencia.puesto }}</h5>
+                        <h6>{{ experiencia.periodo }}</h6>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p>{{ experiencia.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2" *ngIf="usuarioLogueado()">
+                <button class="btn btn-right" data-bs-toggle="modal" data-bs-target="#nuevaExperiencia"><i
+                        class="fas fa-pencil-alt" (click)="onEditExperiencia(i)"></i></button>
+                <i class="fas fa-trash-alt" (click)="borrarExperiencia(experiencia.id)"></i>
+            </div>
+        </div>
+    </div>
+</div>

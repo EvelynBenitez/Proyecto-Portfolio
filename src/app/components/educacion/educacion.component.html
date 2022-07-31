@@ -1,0 +1,88 @@
+<div class="titulos">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h2>Educación</h2>
+            </div>
+            <!-- Button trigger modal -->
+            <div *ngIf="usuarioLogueado()" class="col-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevaEducacion"
+                    (click)="onNewEducacion()">
+                    Agregar Educación
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="nuevaEducacion" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="nuevaEducacionLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="nuevaEducacionLabel">Educación</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form [formGroup]="educacionForm" (ngSubmit)="onSubmit()">
+                                    <input type="hidden" name="id" formControlName="id">
+                                    <div class="mb-3">
+                                        <label for="institucion" class="form-label">Institución</label>
+                                        <input type="text" name="institucion" formControlName="institucion"
+                                            class="form-control" id="institucionInput"
+                                            placeholder="Universidad o institución">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="titulo" class="form-label">Título obtenido</label>
+                                        <input type="text" name="titulo" formControlName="titulo" class="form-control"
+                                            id="tituloInput" placeholder="Título obtenido">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <input type="text" name="descripcion" formControlName="descripcion"
+                                            class="form-control" id="descripcionInput"
+                                            placeholder="Descripción de nueva educación">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="periodo" class="form-label">Período</label>
+                                        <input type="text" name="periodo" formControlName="periodo" class="form-control"
+                                            id="periodoInput" placeholder="Período cursado">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="imagen" class="form-label">Imagen</label>
+                                        <input type="text" name="imagen" formControlName="imagen" class="form-control"
+                                            id="imagenInput" placeholder="Nombre del archivo">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col" *ngFor="let educacion of educaciones, let i = index">
+                        <div class="card" style="width: 18rem;">
+                            <div *ngIf="usuarioLogueado()">
+                                <button><i class="fas fa-pencil-alt" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#nuevaEducacion" (click)="onEditEducacion(i)"></i></button>
+                                <i class="fas fa-trash-alt" (click)="borrarEducacion(educacion.id)"></i>
+                            </div>
+                            <a href=""><img src="/assets/img/{{educacion.imagen}}" class="card-img-top" alt=""></a>
+                            <div class="card-body">
+                                <h5>{{educacion.institucion}}</h5>
+                                <h6>{{educacion.titulo}}</h6>
+                                <p class="card-text">{{educacion.descripcion}}</p>
+                                <p>{{educacion.periodo}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

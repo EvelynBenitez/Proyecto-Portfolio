@@ -1,0 +1,80 @@
+body {
+    font-family: 'Raleway', sans-serif; 
+}
+section {
+    margin: 5%;
+}
+.contenedor{
+    position: relative;
+    display: inline-block;
+    /* text-align: center; */
+    background: url(/assets/img/Portada-01.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    /* min-height: 550px; 
+    margin-bottom: 20px; */
+}
+.texto-encima{
+    /* position: absolute; */
+    /* top: 450px; */
+    /* left: 30px; */
+    /* margin-left: 5%; */
+    margin-top: 36px;
+    margin-left: 7%;
+    padding-bottom: 64px;
+}
+.fotoPerfil{
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 15%; */
+    /* transform: translate(-50%, -50%); */
+    width: 56%;
+    margin-left: 6%;
+    margin-top: 5%;
+}
+.imgRedonda {
+    border-radius: 50%;
+    border:10px solid rgb(255, 255, 255);
+    width: 250px;
+    width: 30%;
+}
+
+@media screen and (min-width:900px) {
+    /*.imgRedonda {
+        border: 6px solid red;
+        display: none;
+    }*/
+}
+@media screen and (max-width:700px) {
+    .texto-encima{
+        margin-top: 65px;
+    }
+    .imgRedonda {
+        border-width: 5px;
+        width:40%;
+    }
+}
+.flexBox {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.5%;
+}
+.sobreMi {
+    background-color: #70D2A4;
+    color:white;
+    padding: 3%;
+    border-color: black;
+}
+
+.imgLogos {
+    display: inline-block;
+    vertical-align: 50%;
+  }
+.texto-exp {
+        display: inline-block;
+        vertical-align: center;
+}
+.titulos {
+    padding: 4%
+}

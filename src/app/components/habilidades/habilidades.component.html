@@ -1,0 +1,75 @@
+<div class="titulos">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h2>Habilidades</h2>
+            </div>
+            <div *ngIf="usuarioLogueado()" class="col-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#habilidades"
+                    (click)="onNewHabilidad()">
+                    Agregar Habilidad
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="habilidades" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="habilidadesLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="habilidadesLabel">Nueva Habilidad</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form [formGroup]="habilidadForm" (ngSubmit)="onSubmit()">
+                                    <input type="hidden" name="id" formControlName="id">
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Habilidad</label>
+                                        <input type="text" name="nombre" formControlName="nombre"
+                                            class="form-control" id="nombreInput"
+                                            placeholder="Nombre de la habilidad">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="porcentaje" class="form-label">Porcentaje</label>
+                                        <input type="text" name="porcentaje" formControlName="porcentaje"
+                                            class="form-control" id="porcentajeInput" placeholder="Porcentaje">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+            </div>
+            <div class="container">
+                <div class="container-fluid">
+                    <div class="card" class="col" *ngFor="let habilidad of habilidades, let i = index">
+                        <div class="card-body" class="row">
+                            <div class="col-8">
+                                <h6 class="card-subtitle mb-2">{{habilidad.nombre}}</h6>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar"
+                                        [style.width]="habilidad.porcentaje + '%'" aria-valuenow="75" aria-valuemin="0"
+                                        aria-valuemax="25">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2" *ngIf="usuarioLogueado()">
+                                <button><i class="fas fa-pencil-alt" data-bs-toggle="modal"
+                                        data-bs-target="#habilidades" (click)="onEditHabilidad(i)"></i></button>
+                                <i class="fas fa-trash-alt" (click)="borrarHabilidad(habilidad.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
